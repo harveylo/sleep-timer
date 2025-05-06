@@ -90,13 +90,26 @@ chrome.tabs.onReplaced.addListener((addedTabId, removedTabId) => {
 });
 
 const togglePlaybackState = () => {
-  // youtube music
-  let musicButton = <HTMLButtonElement>document.getElementsByClassName('play-pause-button')[0];
-  if (!musicButton) {
-    // youtube
-    musicButton = <HTMLButtonElement>document.getElementsByClassName('ytp-play-button')[0];
+  const hostname = window.location.hostname;
+  let button: HTMLButtonElement | null = null;
+
+  if (hostname.includes('youtube.com')) {
+    // youtube music
+    button = <HTMLButtonElement>document.getElementsByClassName('play-pause-button')[0];
+    if (!button) {
+      // youtube
+      button = <HTMLButtonElement>document.getElementsByClassName('ytp-play-button')[0];
+    }
+  } else if (hostname.includes('bilibili.com')) {
+    // bilibili
+    button = <HTMLButtonElement>document.querySelector('.bpx-player-ctrl-btn.bpx-player-ctrl-play');
   }
-  musicButton.click();
+
+  if (button) {
+    button.click();
+  } else {
+    console.log('Could not find play/pause button on this page.');
+  }
 }
 
 async function storeNewLocalAlarm(newAlarm: LocalAlarm) {

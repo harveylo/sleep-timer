@@ -12,7 +12,8 @@ window.addEventListener("load", async function (event) {
 async function validateSite() {
   const tab = await getCurrentTab();
   const url = tab.url;
-  return /^https:\/\/.*\.youtube\.com.*$/.test(url);
+  // Allow youtube.com and bilibili.com domains
+  return /^https:\/\/.*\.youtube\.com.*$|^https:\/\/.*\.bilibili\.com.*$/.test(url);
 }
 
 async function getCurrentTab() {
@@ -24,7 +25,7 @@ async function getCurrentTab() {
 function loadInvalidSitePage() {
   const body = document.body;
   body.innerHTML = `
-    <p>The timer is only accessible on youtube.com and music.youtube.com</p>
+    <p>The timer is only accessible on youtube.com, music.youtube.com, and bilibili.com</p>
   `;
 }
 

@@ -15,7 +15,8 @@
     "storage"
   ],
   "host_permissions": [
-    "https://*.youtube.com/"
+    "https://*.youtube.com/",
+    "https://*.bilibili.com/"
   ],
   "background": {
     "service_worker": "background.js"
